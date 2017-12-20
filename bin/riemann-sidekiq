@@ -53,6 +53,10 @@ class Riemann::Tools::Sidekiq
           service: "sidekiq queues #{name}",
           metric: metric
         )
+        report(
+          service: "sidekiq latency #{name}",
+          metric: ::Sidekiq::Queue.new("name").latency
+        )
       end
     rescue => e
       puts e
